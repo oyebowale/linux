@@ -176,4 +176,11 @@ group info is in : /etc/group
 create groups : groupadd
 delete groups : groupdel
 modify groups : groupmod
-view group membership : groups
+view group membership : group
+
+NETWORK
+TCP : transmission ctrl protocol [controls data xchng]
+IP : intrnt protocol [sends data from one devide to another]
+Class A : 1.0 to 127.0 (eg: 17.24.88.9) [subnet mask : 255.0.0.0] [broadcast :17.255.255.255]
+Class B : 128.0 to 191.255 (Eg: 183.194.46.31) [subnet mask : 255.255.0.0] [broadcast :183.194.255.255]
+Class C : 192.0.0.0 to 233.255.255 (Eg: 199.83.131.186) [subnet mask : 255.255.255.0] [broadcast :199.83.131.255]s
