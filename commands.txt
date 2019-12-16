@@ -1,0 +1,162 @@
+
+/ is  root (top of the file sys)
+/bin  (binaries & other executable progs)
+/etc  system config files
+/home home folder that contains you own files (Eg pics music video)
+/opt  this contains 3rd party apps (Eg: google earth, chrome)
+/tmp  Temporary space (typically clears on reboot)
+/usr  User related programs
+/var  variable data (things that change often Eg: log files)
+/srv/www Here the webserver files stay here
+/srv  contains data derved by the system
+/srv/ftp  FTP files
+/sys  used to display and sometimes configure the devices known to kernl
+
+
+Apps that are not part of the base OS are in /usr/local & /opt
+
+
+Commands
+ls  - list directory
+cd  - change directory
+pwd - present working dir
+cat - display contents of files
+echo - displays arguements 
+man - idsplay online manual
+echo $OLDPWD - shows your previous directory
+mkdir -p 1/2/3 - makes directory and sub dirs.
+rm -rf - deletes dirs and sub contents
+rm -f file force removal & never ask for comfirmation
+cp file_1 file_2 file_3 path of destination dir
+cp -r  10 dir1 - will copy the folder 10 into and make the new dir1
+NOTE cp -r IS FOR COPYING TO DIRECTORIES 
+mv 100 oye100 - this will rename the 100 folder to oye100
+mv OYE1.doc Documents - will move the OYE1 to the Document fldr
+mv file1 file2 - this will make file1 override file2
+tar (C-cr8, x-xtrct, t-display table, v-vervose, z-use compression, f-file specify the file)
+eg: tar cf tps.tar tpsreports (create a tar file from TPSREPORT) or tar cf tps.tgz - compressed file
+    tar ztvf tps.tgz to list files in compressed archive
+    taf tf tps.tar (lists the contents of tps.tar)
+Wales-MacBook-Air:tmp waleoyenuga$ tar xf /Users/waleoyenuga/Downloads/Lib.tar "opens in tmp dir"
+tar xvf /Users/waleoyenuga/Downloads/Lib.tar gives a detailed listing
+gzip - compress files, gunzip - uncompress files, gzcat - view 
+du - shows size of the file, du -k kilobyt size, du -h MB/GB size
+ls -lF - shows the links 
+ls -lr - lists in reverse (r is the command that carries it out)
+ugoa - group usr other all
+chmod g+w (file or dir name) gives or takes permission
+chmod g+w,u-x (gives perm to grp to write & takes away usr perm to xecte)
+usr 4 grp 2 othr 1
+r = 4, w = 2, x =1
+-rwx------ chmod 700
+-rwxr-xr-x chmod 755
+-rw-rw-r-- chmod 664
+-rw-rw---- chmod 660
+-rw-r--r-- chmod 644
+
+find . -name (file name) brings up the file
+find (dir name) name of file or folder
+find . -mtime +10 -mtime -13 (days gap)
+find Downloads/. -name O* -ls (brings items with the name starting with O in the dir)
+find Downloads/. -size +1M (brings things larger than 1mb in the folder)
+
+REDIRECTION:
+> redirects standard output to a file. {over writes existing contents} EG: ls -l > oye.txt (sends results of ls -l to oye.txt)
+>> redirects standart output to a file {appends to an existing contents} EG: ls -l >> oye.txt (adds to the file )
+< recirects input from a file to a command
+> /dev/null - throws away what is fed to it 
+EG: waleoyenuga$ ls OYE1.doc not\here
+ls: nothere: No such file or directory
+OYE1.doc
+waleoyenuga$ ls OYE1.doc not\here 2>/dev/null 
+OYE1.doc
+
+COMPARING FILES:
+diff file1 file2 {compare 2 files}
+sdiff file 1 file2 {side by side comparism}
+vimdiff file1 file2
+
+SEARCHING FILES:
+grep pattern files EG: grep o linux (searches for o in the linux file)
+i Perform search, ignoring case sensitive
+c Count the number of occurences 
+n Precede output wt line numbers (shows line number)
+v Invert match
+
+file {file name} shows the file name and properties
+strings {file name} - makes unreadable files readable 
+strings {file name} | grep {search commands you want to use}
+
+CUSTOMIZE SHELL: PS1="<\u@\h \w>$ "
+
+ALIASES: make sure its saved in the bash profile for continuous use
+vi ~/.bash_profile
+alias ll='ls -l' 
+alias la='ls -la'
+alias grp='grep'
+
+LISTING PROCESSES & INFO
+ps    :displays process and status
+ps -e :everything, all processes
+ps -f : full format listing
+ps -u username : displays username's processes
+ps -p pid : displays infor for PID
+ps -eH : Display process tree
+ps -e --forest : Display a process tree
+ps -u username : display user's processes
+pstree : Displays processes in a tree format
+top : interactive process viewer
+htop : interactive process viewer
+command & starts command in the background
+bg [%num] : background a suspended process
+fg [%num] : foreground a suspended process
+jobs [%num] : List jobs
+kill -l lists all commands to kill a job
+
+SCHEDULE CRON JOB
+*Month *hour *day *month of the year *day
+crontab filename : Install a new crontab from file
+crontab -l : list your cron jobs
+crontab -e : edit your cron jobs
+crontab -r : remove cron jobs
+
+SHELL HISTORY
+history : displays the shell history
+HISTSIZE : controls the number of commands to retain in history EG: export HISTSIZE=1000
+!(number) : runs the command with the number relevant 
+history shows ALL the commands you have run
+!h : shows all the item in the history with first letter h
+!! : runs the most recent command
+echo !:2 runs the command on the second string of hte last command
+
+PACKAGES INSTALLATION
+rpm -qa : list all installed packages
+rpm -qf [path to file] : lists the file package
+rpm -ql [package name] : lists package files
+rpm -ivh [package].rpm : installs package
+rpm -e [package] : erases package
+
+DISK MANAGEMENT
+mkfs -t : TYPE DEVICE 
+mkfs -t ext3 /dev/sdb2 [path to the partition on which you want the file sys to reside] 
+run man mkfs.xfs : for options
+mount /[path to the device] /[directry you want to mount the device] EG: mount /dev/sdb3 /opt
+
+LVM
+cr8 PV [phy. vol] > cr8 vol grp from PV> cr8 logical vol from Vol grp
+check with lvmdiskscan > lsblk -p > df -h (displays detail)
+cr8 PV : pvcreate [path you want to create] verify with pvs
+cr8 vg : vgcreate [name] [path of the PV] verify with vgs
+cr8 lv : lvcreate -L [size] -n [name of lv] [name of vg it should sit ontop] verify with lvs
+run lvdisplay > after ds, make a filesys on the LV and mount it
+run : mkfs -t ext4 {this is the type we want} [path to be mounted]
+cr8 mount point : mkdir /[name] > mount [path of LV] [dir created] > df -h /[dir name] 
+now create space for actual file for the app or whatever 
+to mount it at boot time : vi /etc/fstab > [desired path] ext4 defaults 0 0
+
+To remove: 
+umount /[name of dirve] > lvremove /[path of the unmounted lv] > vgreduce [name of vg]/[path of vg]
+pvremove /[path of the volume]
+To remove the vol. grp : vgremove [name of vg]
+to remove the phy vol : pvremove [path of PV]
+to transfer btw phy vols : pvmove /[source path] /[dest path].
