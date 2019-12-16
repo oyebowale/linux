@@ -159,4 +159,9 @@ umount /[name of dirve] > lvremove /[path of the unmounted lv] > vgreduce [name 
 pvremove /[path of the volume]
 To remove the vol. grp : vgremove [name of vg]
 to remove the phy vol : pvremove [path of PV]
-to transfer btw phy vols : pvmove /[source path] /[dest path].
+to transfer btw phy vols : pvmove /[source path] /[dest path]
+
+USER and Groups
+groupadd [name]
+tail -[numer you want] /etc/group
+useradd -c [name of user] -g [group] -G [group] -m -s [s is shell] /bin/bash *username*
