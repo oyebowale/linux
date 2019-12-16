@@ -164,4 +164,16 @@ to transfer btw phy vols : pvmove /[source path] /[dest path]
 USER and Groups
 groupadd [name]
 tail -[numer you want] /etc/group
-useradd -c [name of user] -g [group] -G [group] -m -s [s is shell] /bin/bash *username*
+useradd -c [name of user] -g [primary group] -G [secondary group],[another group] -m -s [s is shell] /bin/bash *username*
+passwd [username]
+groups [username] to see name of groups it belongs to
+grep 1002 or [group ID or GID] /etc/passwd
+account info is stored in /etc/passwd and /etc/shadow
+account info is stored in /etc/passwd and /etc/shadow
+userdel : to delete users
+usermod : to modify user
+group info is in : /etc/group
+create groups : groupadd
+delete groups : groupdel
+modify groups : groupmod
+view group membership : groups
